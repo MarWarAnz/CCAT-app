@@ -5,29 +5,63 @@
  */
 package ccat;
 
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 
 public class FileLoader {
     
     private final Scanner fileLoader;
-    private final HashMap<String, HashMap<String, ArrayList<String>>> content;
+    private final Map<String, Map<String, List<String>>> content;
     
-    public FileLoader(File file) throws FileNotFoundException{
+    public FileLoader(FileReader file) throws FileNotFoundException{
         fileLoader = new Scanner(file);
         content = new HashMap<>();
     }
     
-    public HashMap getContent(){return content;}
+    public Map getContent(){return content;}
+    public void traverseMap(){
+        for (String header : content.keySet()){
+            System.out.println(header);
+            for (String subheader : content.get(header).keySet()){
+                System.out.println(subheader);
+                for (String field : content.get(header).get(subheader))
+                    System.out.println(field);
+            }
+        }
+    }
     
-    public boolean loadFile(){
+    public void loadTemplate(){
+        String header = null, subHeader = null, temp;
+        Map<String, List<String>> sections = new HashMap<>();
+        List<String> fields = new ArrayList<>();
+        
         while (fileLoader.hasNextLine()){
+            temp = fileLoader.nextLine();
+            
+            if (temp.isEmpty()) {}
+            else if  (temp.charAt(0) == '['){
+                content.put(header, sections);
+                sections = new HashMap<>();
+                header = temp;//.split("\\[")[1].split("\\]")[0];
+                subHeader = fileLoader.nextLine();
+            }
+            else if (temp.charAt(0) == '-'){
+                sections.put(subHeader, fields);
+                fields = new ArrayList<>();
+                subHeader = temp;
+            }
+            
+            else {
+                fields.add(temp);
+            }
             
         }
-        return true;
+        
     }
 }
