@@ -5,10 +5,29 @@
  */
 package ccat;
 
-/**
- *
- * @author JRebo_000
- */
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
+
+
 public class FileLoader {
     
+    private final Scanner fileLoader;
+    private final HashMap<String, HashMap<String, ArrayList<String>>> content;
+    
+    public FileLoader(File file) throws FileNotFoundException{
+        fileLoader = new Scanner(file);
+        content = new HashMap<>();
+    }
+    
+    public HashMap getContent(){return content;}
+    
+    public boolean loadFile(){
+        while (fileLoader.hasNextLine()){
+            
+        }
+        return true;
+    }
 }
