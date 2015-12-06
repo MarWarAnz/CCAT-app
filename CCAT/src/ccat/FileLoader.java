@@ -37,7 +37,7 @@ public class FileLoader {
     }
     
     public void loadTemplate(){
-        String header = null, subHeader = null, temp;
+        String header = "", subHeader = "", temp;
         Map<String, List<String>> sections = new HashMap<>();
         List<String> fields = new ArrayList<>();
         
@@ -46,15 +46,15 @@ public class FileLoader {
             
             if (temp.isEmpty()) {}
             else if  (temp.charAt(0) == '['){
-                content.put(header, sections);
+                if (!header.isEmpty()) content.put(header, sections);
                 sections = new HashMap<>();
-                header = temp;//.split("\\[")[1].split("\\]")[0];
-                subHeader = fileLoader.nextLine();
+                header = temp.split("\\[")[1].split("\\]")[0];
+                subHeader = fileLoader.nextLine().split("-")[1];
             }
             else if (temp.charAt(0) == '-'){
                 sections.put(subHeader, fields);
                 fields = new ArrayList<>();
-                subHeader = temp;
+                subHeader = temp.split("-")[1];
             }
             
             else {
