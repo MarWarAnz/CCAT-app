@@ -5,9 +5,7 @@
  */
 package ccat_view;
 
-import java.io.File;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,7 +30,7 @@ public class SplashScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 //        Image img = new Image("/stethoscope.png");
-        Image img = new Image("/stethoscopeAndComputer.jpg");
+        Image img = new Image("/stethoscopeAndComputerNew.jpg");
         imageView.setImage(img);
     }    
     

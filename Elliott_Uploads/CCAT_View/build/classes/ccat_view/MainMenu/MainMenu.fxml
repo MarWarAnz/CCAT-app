@@ -21,11 +21,23 @@
                         </ScrollPane>
                      </content>
                   </Tab>
-                <Tab text="Part B" />
+                <Tab text="Part B">
+                     <content>
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="426.0" prefWidth="640.0" />
+                          </content>
+                        </ScrollPane>
+                     </content>
+                  </Tab>
                   <Tab text="Part C">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
+                     <content>
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="425.0" prefWidth="640.0" />
+                          </content>
+                        </ScrollPane>
+                     </content>
                   </Tab>
                   <Tab text="Admin">
                     <content>
@@ -40,14 +52,14 @@
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Admin Tasks" />
-                        <MenuItem mnemonicParsing="false" text="Logout" />
-                        <MenuItem mnemonicParsing="false" text="Exit" />
+                    <MenuItem mnemonicParsing="false" onAction="#onAdminTasks" text="Admin Tasks" />
+                        <MenuItem mnemonicParsing="false" onAction="#onLogout" text="Logout" />
+                        <MenuItem mnemonicParsing="false" onAction="#onExit" text="Exit" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
+                    <MenuItem mnemonicParsing="false" onAction="#onAbout" text="About" />
                   </items>
                 </Menu>
               </menus>

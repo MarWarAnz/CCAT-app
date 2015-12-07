@@ -52,14 +52,14 @@
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Admin Tasks" />
-                        <MenuItem mnemonicParsing="false" text="Logout" />
-                        <MenuItem mnemonicParsing="false" text="Exit" />
+                    <MenuItem mnemonicParsing="false" onAction="#onAdminTasks" text="Admin Tasks" />
+                        <MenuItem mnemonicParsing="false" onAction="#onLogout" text="Logout" />
+                        <MenuItem mnemonicParsing="false" onAction="#onExit" text="Exit" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
+                    <MenuItem mnemonicParsing="false" onAction="#onAbout" text="About" />
                   </items>
                 </Menu>
               </menus>
