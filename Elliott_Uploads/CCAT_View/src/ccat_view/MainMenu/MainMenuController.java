@@ -15,8 +15,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
-
+import ccat_model.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  * FXML Controller class
  *
@@ -26,6 +32,19 @@ public class MainMenuController implements Initializable {
     
     @FXML
     private MenuItem exit;
+    
+    private FileLoader template;
+    
+    @FXML
+    private ScrollPane partAScroller;
+    @FXML
+    private ScrollPane partBScroller;
+    @FXML
+    private ScrollPane partCScroller;
+
+    public MainMenuController(){
+        
+    }
 
     @FXML
     private void onLogout(ActionEvent event) {
@@ -56,7 +75,17 @@ public class MainMenuController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
+    
+    @FXML
+    private void populateTabs(ScrollPane pane){
+        
+        Map content; //= template.getContent();
+        if (pane == partAScroller){
+            content = template.getContent().get("Part A: MetaData")
+            
+        }
+    }
+            
     /**
      * Initializes the controller class.
      *
@@ -65,7 +94,12 @@ public class MainMenuController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try {
+            this.template = new FileLoader(new FileReader("questions.txt"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MainMenuController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
 }
