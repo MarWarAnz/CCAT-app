@@ -1,6 +1,7 @@
 
-package ccat;
+package ccat_model;
 
+import ccat.FileLoader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;

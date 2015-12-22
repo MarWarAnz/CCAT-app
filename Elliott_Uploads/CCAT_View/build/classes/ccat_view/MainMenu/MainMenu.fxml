@@ -14,9 +14,12 @@
               <tabs>
                 <Tab text="Part A">
                      <content>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                        <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0">
                           <content>
-                            <AnchorPane prefHeight="426.0" prefWidth="640.0" />
+                            <AnchorPane prefHeight="426.0" prefWidth="640.0">
+                                 <children>
+                                    <VBox fx:id="partAScroller" prefHeight="425.0" prefWidth="640.0" />
+                                 </children></AnchorPane>
                           </content>
                         </ScrollPane>
                      </content>
@@ -25,7 +28,10 @@
                      <content>
                         <ScrollPane prefHeight="200.0" prefWidth="200.0">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="426.0" prefWidth="640.0" />
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="426.0" prefWidth="640.0">
+                                 <children>
+                                    <VBox fx:id="partBScroller" prefHeight="428.0" prefWidth="640.0" />
+                                 </children></AnchorPane>
                           </content>
                         </ScrollPane>
                      </content>
@@ -34,7 +40,10 @@
                      <content>
                         <ScrollPane prefHeight="200.0" prefWidth="200.0">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="425.0" prefWidth="640.0" />
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="425.0" prefWidth="640.0">
+                                 <children>
+                                    <VBox fx:id="partCScroller" prefHeight="427.0" prefWidth="640.0" />
+                                 </children></AnchorPane>
                           </content>
                         </ScrollPane>
                      </content>

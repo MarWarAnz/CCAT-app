@@ -43,7 +43,7 @@ public class FileLoader {
         
         while (fileLoader.hasNextLine()){
             temp = fileLoader.nextLine();
-            
+            System.out.println(temp);
             if (temp.isEmpty()) {}
             else if  (temp.charAt(0) == '['){
                 if (!header.isEmpty()) content.put(header, sections);
@@ -52,16 +52,29 @@ public class FileLoader {
                 subHeader = fileLoader.nextLine().split("-")[1];
             }
             else if (temp.charAt(0) == '-'){
+                
+                //TODO: make sure the last read in subheader is put to the map properly
                 sections.put(subHeader, fields);
                 fields = new ArrayList<>();
                 subHeader = temp.split("-")[1];
             }
             
             else {
-                fields.add(temp);
+                fields.add(temp.substring(2));
             }
             
         }
+        content.put(header, sections);
         
+    }
+    
+    //TODO: make headers return in the same order as they are in questions.txt
+    public List<String> getHeaders(){
+        List<String> headers = new ArrayList<>();
+        for (String key : content.keySet()){
+            headers.add(key);
+            System.out.println(key);
+        }
+        return headers;
     }
 }

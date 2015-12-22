@@ -25,6 +25,7 @@ public class FileLoader {
     }
     
     public Map getContent(){return content;}
+    
     public void traverseMap(){
         for (String header : content.keySet()){
             System.out.println(header);

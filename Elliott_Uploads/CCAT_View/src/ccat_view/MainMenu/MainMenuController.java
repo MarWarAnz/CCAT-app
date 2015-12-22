@@ -18,11 +18,25 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 import ccat_model.*;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.geometry.Insets;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.HBoxBuilder;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javax.swing.ButtonGroup;
 /**
  * FXML Controller class
  *
@@ -36,11 +50,16 @@ public class MainMenuController implements Initializable {
     private FileLoader template;
     
     @FXML
-    private ScrollPane partAScroller;
+    private VBox partAScroller;
     @FXML
-    private ScrollPane partBScroller;
+    private VBox partBScroller;
     @FXML
-    private ScrollPane partCScroller;
+    private VBox partCScroller;
+    
+    private List<VBox> scrollers;
+    
+    @FXML
+    private Map<String, HBox> accessor;
 
     public MainMenuController(){
         
@@ -77,14 +96,63 @@ public class MainMenuController implements Initializable {
     }
     
     @FXML
-    private void populateTabs(ScrollPane pane){
+    private void populateTabs(){
         
-        Map content; //= template.getContent();
-        if (pane == partAScroller){
-            content = template.getContent().get("Part A: MetaData")
+        Map<String, Map<String, List<String>>> content = template.getContent();
+        //template.traverseMap();
+        template.getHeaders();
+        int i = 0;
+        for (String header : content.keySet()){
             
+            for (String subheader : content.get(header).keySet()){
+                
+                HBox sectionBox = new HBox();
+                Label subHeaderLabel = new Label(subheader);
+                subHeaderLabel.setFont(Font.font("Verdana", 15));
+                sectionBox.getChildren().add(subHeaderLabel);
+                scrollers.get(i).getChildren().add(sectionBox);
+                List<String> list = content.get(header).get(subheader);
+                
+                for (int ii = 0; ii < list.size(); ii++){
+                    
+                    Label label = new Label(list.get(ii));
+                    label.setPrefWidth(350.0);
+                    ToggleGroup group = new ToggleGroup();
+                    RadioButton yes = new RadioButton("");
+                    RadioButton no = new RadioButton("");
+                    RadioButton na = new RadioButton("");
+                    yes.setPrefWidth(5.0);
+                    no.setPrefWidth(5.0);
+                    na.setPrefWidth(5.0);
+                    yes.setToggleGroup(group);
+                    no.setToggleGroup(group);
+                    na.setToggleGroup(group);
+                    //TODO:  add ToggleGroup to a list so input can be accessed later
+                    HBox box;
+                    box = HBoxBuilder.create()
+                            .spacing(60.0)
+                            .padding(new Insets(5, 5, 5, 5))
+                            .children(label, yes, no, na)
+                            .build();
+                    box.borderProperty();
+                    scrollers.get(i).getChildren().add(box);
+                    
+                }
+            }
+            i++;
         }
     }
+    
+    //TODO: add onClickListeners to radioButton groups to update score in real time
+    //      as well as check for errors in case someone tries to submit an incomplete 
+    //      form
+    
+    
+
+    //TODO: add tabs dynamically to make the populateTabs function run more smoothly 
+    //      and be more loosely coupled
+    
+    
             
     /**
      * Initializes the controller class.
@@ -99,7 +167,12 @@ public class MainMenuController implements Initializable {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MainMenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        scrollers = new ArrayList<>();
+        scrollers.add(partAScroller);
+        scrollers.add(partBScroller);
+        scrollers.add(partCScroller);
+        template.loadTemplate();
+        populateTabs();
     }
 
 }
