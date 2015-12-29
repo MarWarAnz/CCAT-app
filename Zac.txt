@@ -1,0 +1,19 @@
+
+Zac, your mission, should you choose to accept will be to build a layout for the admins
+tab including a chart (visible for everyone) and tools for creating and deleting
+administrator accounts (admins only) by Friday, January 8th.
+
+After those are done, feel free to get started on one of the following tasks if you are 
+feeling ambitious:
+
+	1) Reading in files to populate the charts (might need to do this for the chart 
+	   anyways)
+	
+	2) file browser to pick which to be read in (check if .ccat file)
+	
+	3) delete files from within the app
+	
+	4) read in all files from the last week (two weeks, etc) into the app at once(as a 
+	   list view?) as well as give option to delete individual files from this list	
+
+You're country is counting on you agent.  This message will now self destruct. . .
