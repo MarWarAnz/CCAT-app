@@ -15,7 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollPane;
+
 import javafx.stage.Stage;
 import ccat_model.*;
 
@@ -27,16 +27,17 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.geometry.Insets;
-import javafx.scene.control.CheckBox;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.AnchorPane;
+
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.HBoxBuilder;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javax.swing.ButtonGroup;
+
 /**
  * FXML Controller class
  *
@@ -80,7 +81,7 @@ public class MainMenuController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("VerifyAdmin.fxml"));
         Scene scene = new Scene(root);
         Stage stage = new Stage();
-        stage.setTitle("CCAT");
+        stage.setTitle("CCAT - Login");
         stage.setScene(scene);
         stage.show();
     }
@@ -95,6 +96,9 @@ public class MainMenuController implements Initializable {
         stage.show();
     }
     
+    
+    //TODO: make partB tab also scrollable
+    
     @FXML
     private void populateTabs(){
         
@@ -106,24 +110,25 @@ public class MainMenuController implements Initializable {
             
             for (String subheader : content.get(header).keySet()){
                 
-                HBox sectionBox = new HBox();
+                HBox sectionBox = new HBox();   
+                sectionBox.setStyle("-fx-background-color: #336699");
                 Label subHeaderLabel = new Label(subheader);
+                subHeaderLabel.setTextFill(Color.web("#FFFFFF"));
                 subHeaderLabel.setFont(Font.font("Verdana", 15));
                 sectionBox.getChildren().add(subHeaderLabel);
                 scrollers.get(i).getChildren().add(sectionBox);
                 List<String> list = content.get(header).get(subheader);
                 
-                for (int ii = 0; ii < list.size(); ii++){
-                    
-                    Label label = new Label(list.get(ii));
-                    label.setPrefWidth(350.0);
+                for (String list1 : list) {
+                    Label label = new Label(list1);
+                    label.setPrefWidth(305.0);
                     ToggleGroup group = new ToggleGroup();
-                    RadioButton yes = new RadioButton("");
-                    RadioButton no = new RadioButton("");
-                    RadioButton na = new RadioButton("");
-                    yes.setPrefWidth(5.0);
-                    no.setPrefWidth(5.0);
-                    na.setPrefWidth(5.0);
+                    RadioButton yes = new RadioButton("yes");
+                    RadioButton no = new RadioButton("no");
+                    RadioButton na = new RadioButton("n/a");
+                    yes.setPrefWidth(55.0);
+                    no.setPrefWidth(55.0);
+                    na.setPrefWidth(55.0);
                     yes.setToggleGroup(group);
                     no.setToggleGroup(group);
                     na.setToggleGroup(group);
@@ -136,7 +141,6 @@ public class MainMenuController implements Initializable {
                             .build();
                     box.borderProperty();
                     scrollers.get(i).getChildren().add(box);
-                    
                 }
             }
             i++;
@@ -152,7 +156,7 @@ public class MainMenuController implements Initializable {
     //TODO: add tabs dynamically to make the populateTabs function run more smoothly 
     //      and be more loosely coupled
     
-    
+    //TODO: error logging and reporting option
             
     /**
      * Initializes the controller class.

@@ -14,8 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
+
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -56,7 +55,7 @@ public class CCAT_View extends Application {
     private void displayLoginScene(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("MainMenu/MainMenu.fxml"));
         Scene scene = new Scene(root);
-        stage.setTitle("CCAT");
+        stage.setTitle("Critical Care Audit Tool - CONFIDENTIAL");
         stage.setScene(scene);
         stage.show();
     }
