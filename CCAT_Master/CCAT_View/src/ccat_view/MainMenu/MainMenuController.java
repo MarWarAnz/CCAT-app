@@ -22,15 +22,20 @@ import ccat_model.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.FlowPane;
 
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.HBoxBuilder;
@@ -58,6 +63,8 @@ public class MainMenuController implements Initializable {
     private VBox partCScroller;
     
     private List<VBox> scrollers;
+    //private List<ToggleGroup> answers;
+    private Map<ToggleGroup, String> answers;
     
     @FXML
     private Map<String, HBox> accessor;
@@ -103,6 +110,7 @@ public class MainMenuController implements Initializable {
     private void populateTabs(){
         
         Map<String, Map<String, List<String>>> content = template.getContent();
+        answers = new HashMap<>();
         //template.traverseMap();
         template.getHeaders();
         int i = 0;
@@ -110,7 +118,7 @@ public class MainMenuController implements Initializable {
             
             for (String subheader : content.get(header).keySet()){
                 
-                HBox sectionBox = new HBox();   
+                FlowPane sectionBox = new FlowPane();   
                 sectionBox.setStyle("-fx-background-color: #336699");
                 Label subHeaderLabel = new Label(subheader);
                 subHeaderLabel.setTextFill(Color.web("#FFFFFF"));
@@ -119,28 +127,54 @@ public class MainMenuController implements Initializable {
                 scrollers.get(i).getChildren().add(sectionBox);
                 List<String> list = content.get(header).get(subheader);
                 
-                for (String list1 : list) {
-                    Label label = new Label(list1);
-                    label.setPrefWidth(305.0);
+                
+                for (String question : list) {
+                    Label label = new Label(question);
+                    label.setPrefWidth(450.0);
                     ToggleGroup group = new ToggleGroup();
                     RadioButton yes = new RadioButton("yes");
                     RadioButton no = new RadioButton("no");
                     RadioButton na = new RadioButton("n/a");
-                    yes.setPrefWidth(55.0);
-                    no.setPrefWidth(55.0);
-                    na.setPrefWidth(55.0);
+                    yes.setPrefWidth(40.0);
+                    no.setPrefWidth(40.0);
+                    na.setPrefWidth(40.0);
                     yes.setToggleGroup(group);
                     no.setToggleGroup(group);
                     na.setToggleGroup(group);
+                    TextArea area = new TextArea();
+                    area.setPrefSize(615.0, 100.0);
+                    area.setVisible(false);
+                    
+                    no.setOnAction((ActionEvent event) -> {
+                        //area.setMaxSize(600.0, 10.0);
+                        area.resize(600.0, 10.0);
+                        area.setVisible(true);
+                    });
+                    na.setOnAction((ActionEvent event) -> {
+                        //area.setMaxSize(600.0, 10.0);
+                        area.resize(600.0, 10.0);
+                        area.setVisible(true);
+                    });
+                    yes.setOnAction((ActionEvent event) -> {
+                        //area.setMaxSize(0.0, 0.0);
+                        area.resize(0.0, 0.0);
+                        area.setVisible(false);
+                    });
+                    
+                    answers.put(group, question);
                     //TODO:  add ToggleGroup to a list so input can be accessed later
-                    HBox box;
-                    box = HBoxBuilder.create()
-                            .spacing(60.0)
-                            .padding(new Insets(5, 5, 5, 5))
-                            .children(label, yes, no, na)
-                            .build();
-                    box.borderProperty();
-                    scrollers.get(i).getChildren().add(box);
+                    FlowPane flow = new FlowPane();
+                    flow.setVgap(10.0);
+                    flow.setHgap(10.0);
+                    flow.setPrefWrapLength(600.0);
+                    flow.getChildren().addAll(label, yes, no, na, area);
+//                    FlowPane flow2 = new FlowPane();
+//                    flow2.setVgap(10.0);
+//                    flow2.setHgap(10.0);
+//                    flow2.setMaxSize(0.0, 0.0);
+//                    flow2.getChildren().add(area);
+
+                    scrollers.get(i).getChildren().addAll(flow);
                 }
             }
             i++;
