@@ -118,7 +118,7 @@ public class MainMenuController implements Initializable {
             
             for (String subheader : content.get(header).keySet()){
                 
-                FlowPane sectionBox = new FlowPane();   
+                FlowPane sectionBox = new FlowPane(); 
                 sectionBox.setStyle("-fx-background-color: #336699");
                 Label subHeaderLabel = new Label(subheader);
                 subHeaderLabel.setTextFill(Color.web("#FFFFFF"));
