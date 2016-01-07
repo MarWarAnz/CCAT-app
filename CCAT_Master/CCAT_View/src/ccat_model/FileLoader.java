@@ -8,6 +8,7 @@ package ccat_model;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,7 @@ public class FileLoader {
         content = new HashMap<>();
     }
     
-    public Map getContent(){return content;}
+    public Map<String, Map<String, List<String>>> getContent(){return Collections.unmodifiableMap(content);}
     public void traverseMap(){
         for (String header : content.keySet()){
             System.out.println(header);

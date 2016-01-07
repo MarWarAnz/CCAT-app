@@ -38,7 +38,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.FlowPane;
 
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.HBoxBuilder;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -50,24 +49,22 @@ import javafx.scene.text.Font;
  */
 public class MainMenuController implements Initializable {
     
-    @FXML
-    private MenuItem exit;
-    
     private FileLoader template;
     
+    @FXML
+    private MenuItem exit;
     @FXML
     private VBox partAScroller;
     @FXML
     private VBox partBScroller;
     @FXML
     private VBox partCScroller;
+    @FXML
+    private Map<String, HBox> accessor;
     
     private List<VBox> scrollers;
     //private List<ToggleGroup> answers;
     private Map<ToggleGroup, String> answers;
-    
-    @FXML
-    private Map<String, HBox> accessor;
 
     public MainMenuController(){
         
@@ -142,22 +139,24 @@ public class MainMenuController implements Initializable {
                     no.setToggleGroup(group);
                     na.setToggleGroup(group);
                     TextArea area = new TextArea();
-                    area.setPrefSize(615.0, 100.0);
+                    area.setPrefSize(0.0, 0.0);
                     area.setVisible(false);
                     
                     no.setOnAction((ActionEvent event) -> {
                         //area.setMaxSize(600.0, 10.0);
-                        area.resize(600.0, 10.0);
+                        //area.resize(600.0, 10.0);
+                        area.setPrefSize(600.0, 10.0);
                         area.setVisible(true);
                     });
                     na.setOnAction((ActionEvent event) -> {
                         //area.setMaxSize(600.0, 10.0);
-                        area.resize(600.0, 10.0);
+                        //area.resize(600.0, 10.0);
+                        area.setPrefSize(600.0, 10.0);
                         area.setVisible(true);
                     });
                     yes.setOnAction((ActionEvent event) -> {
                         //area.setMaxSize(0.0, 0.0);
-                        area.resize(0.0, 0.0);
+                        //area.resize(0.0, 0.0);
                         area.setVisible(false);
                     });
                     
