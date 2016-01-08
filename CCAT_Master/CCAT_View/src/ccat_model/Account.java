@@ -18,9 +18,9 @@ import java.util.Scanner;
  */
 public abstract class Account {
     
-    File accounts;
-    String uname;
-    String pass;
+    protected File accounts;
+    protected String uname;
+    protected String pass;
     
     public Account() throws FileNotFoundException{
         this.accounts = new File("accounts.txt");
