@@ -56,7 +56,7 @@ public class CCAT_View extends Application {
     private void displayLoginScene(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("MainMenu/MainMenu.fxml"));
         Scene scene = new Scene(root);
-        stage.setMaximized(true);
+        //stage.setMaximized(true);
         stage.setTitle("Critical Care Audit Tool - CONFIDENTIAL");
         stage.setScene(scene);
         stage.show();

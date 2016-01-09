@@ -126,7 +126,8 @@ public class MainMenuController implements Initializable {
             //tabPane.getSelectionModel().select(tabs.get(i));
             scrollers.get(i).setAlignment(Pos.CENTER); 
             for (String subheader : content.get(header).keySet()){
-                
+                //content.get(header).keySet()
+                //template.getOrderedSubheaders()
                 //AnchorPane anchor = new AnchorPane();
                 
                 FlowPane sectionBox = new FlowPane(); 
@@ -144,13 +145,14 @@ public class MainMenuController implements Initializable {
                 scrollers.get(i).getChildren().add(sectionBox);
                 
                 List<String> list = content.get(header).get(subheader);
-                
+                 System.out.println(subheader);
                 
                 for (String question : list) {
-                    
+                   
                     AnchorPane anchor2 = new AnchorPane();
                     Label label = new Label(question);
-                    label.setPrefWidth(360.0);
+                    label.setPrefWidth(590.0);
+                    label.setStyle("-fx-font-weight: bold");
                     AnchorPane.setBottomAnchor(label, 0.0);
                     AnchorPane.setTopAnchor(label, 0.0);
                     AnchorPane.setLeftAnchor(label, 0.0);
@@ -169,23 +171,29 @@ public class MainMenuController implements Initializable {
                     area.setPrefSize(0.0, 0.0);
                     area.setVisible(false);
                     FlowPane flow = new FlowPane();
+//                    Pane pane = new Pane();
+//                    pane.setPrefWidth(700);
+                    
+                    
                     no.setOnAction((ActionEvent event) -> {
                         //area.setMaxSize(600.0, 10.0);
                         //area.resize(600.0, 10.0);
-                        area.setPrefSize(600.0, 10.0);
+                        //AnchorPane.setRightAnchor(area, Double.NaN);
+                        area.setPrefSize(800.0, 65.0);
                         area.setVisible(true);
+                        area.positionCaret(0);
                     });
                     na.setOnAction((ActionEvent event) -> {
                         //area.setMaxSize(600.0, 10.0);
                         //area.resize(600.0, 10.0);
-                        area.setPrefSize(600.0, 10.0);
+                        area.setPrefSize(800.0, 65.0);
                         area.setVisible(true);
                     });
                     yes.setOnAction((ActionEvent event) -> {
                         //area.setMaxSize(0.0, 0.0);
                         area.setPrefSize(0.0, 0.0);
                         area.setVisible(false);
-                        flow.resize(600.0, 10.0);
+                        flow.resize(800.0, 10.0);
                     });
                     
                     answers.put(group, question);
@@ -193,7 +201,7 @@ public class MainMenuController implements Initializable {
                     
                     flow.setVgap(10.0);
                     flow.setHgap(10.0);
-                    flow.setPrefWrapLength(600.0);
+                    flow.setPrefWrapLength(800.0);
                     flow.getChildren().addAll(label, yes, no, na, area);
                     flow.setStyle("-fx-border-style: solid;"
                                     + "-fx-border-width: 0.25;"
