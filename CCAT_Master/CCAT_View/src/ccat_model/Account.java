@@ -10,52 +10,67 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.Scanner;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  *
  * @author JRebo_000
  */
 public abstract class Account {
-    
+
     protected File accounts;
     protected String uname;
     protected String pass;
-    
-    public Account() throws FileNotFoundException{
+
+    public Account() throws FileNotFoundException {
         this.accounts = new File("accounts.txt");
     }
-    
-    public boolean validate(String uname, String pass) throws FileNotFoundException{
+
+    public boolean validate(String uname, String pass) throws FileNotFoundException {
         FileReader reader = new FileReader(accounts);
         Scanner scanner = new Scanner(reader);
         String[] validator;
         //TO-DO: create md5 of password + salt to compare to
-        while (scanner.hasNext()){
+        while (scanner.hasNext()) {
             validator = scanner.nextLine().split(" ");
-            if(uname.compareTo(validator[0]) == 0 && 
-               pass.compareTo(validator[1]) == 0){
+            if (uname.compareTo(validator[0]) == 0
+                    && pass.compareTo(validator[1]) == 0) {
                 return true;
             }
         }
         return false;
     }
-    
-    public void create(String uname, String passwd){
+
+    public void create(String uname, String passwd) {
         this.uname = uname;
         this.pass = passwd;
-        
+
         //TO-DO: create md5 hash + salt to passwd
-        try
-        {
-            String filename= "accounts.txt";
-            FileWriter fw = new FileWriter(filename,true); //the true will append the new data
+        try {
+            String filename = "accounts.txt";
+            FileWriter fw = new FileWriter(filename, true); //the true will append the new data
             fw.write(uname + " " + passwd + "\n");//appends the string to the file
             fw.close();
-        }
-        catch(IOException ioe)
-        {
+        } catch (IOException ioe) {
             System.err.println("IOException: " + ioe.getMessage());
+        }
+    }
+
+    private String MD5(String s) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(pass.getBytes());
+            BigInteger number = new BigInteger(1, messageDigest);
+            String hashtext = number.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
