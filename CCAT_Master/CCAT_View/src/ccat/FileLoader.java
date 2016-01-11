@@ -32,8 +32,9 @@ public class FileLoader {
             System.out.println(header);
             for (String subheader : content.get(header).keySet()){
                 System.out.println(subheader);
-                for (String field : content.get(header).get(subheader))
+                for (String field : content.get(header).get(subheader)) {
                     System.out.println(field);
+                }
             }
         }
     }
@@ -48,7 +49,9 @@ public class FileLoader {
             
             if (temp.isEmpty()) {}
             else if  (temp.charAt(0) == '['){
-                if (!header.isEmpty()) content.put(header, sections);
+                if (!header.isEmpty()) {
+                    content.put(header, sections);
+                }
                 sections = new HashMap<>();
                 header = temp.split("\\[")[1].split("\\]")[0];
                 subHeader = fileLoader.nextLine().split("-")[1];

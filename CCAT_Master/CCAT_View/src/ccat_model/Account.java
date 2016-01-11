@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.util.Scanner;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 /**
  *
@@ -24,8 +23,10 @@ public abstract class Account {
     protected File accounts;
     protected String uname;
     protected String pass;
+    protected String salt;
 
     public Account() throws FileNotFoundException {
+        this.salt = "M5@aG9:[2cY0";
         this.accounts = new File("accounts.txt");
     }
 
@@ -33,11 +34,12 @@ public abstract class Account {
         FileReader reader = new FileReader(accounts);
         Scanner scanner = new Scanner(reader);
         String[] validator;
-        //TO-DO: create md5 of password + salt to compare to
+        // MD5 of password + salt to compare to
+        String MD5 = MD5(pass + this.salt);
         while (scanner.hasNext()) {
             validator = scanner.nextLine().split(" ");
             if (uname.compareTo(validator[0]) == 0
-                    && pass.compareTo(validator[1]) == 0) {
+                    && MD5.compareTo(validator[1]) == 0) {
                 return true;
             }
         }
@@ -48,7 +50,8 @@ public abstract class Account {
         this.uname = uname;
         this.pass = passwd;
 
-        //TO-DO: create md5 hash + salt to passwd
+        // MD5 hash + salt to passwd
+        String MD5 = MD5(passwd + this.salt);
         try {
             String filename = "accounts.txt";
             FileWriter fw = new FileWriter(filename, true); //the true will append the new data

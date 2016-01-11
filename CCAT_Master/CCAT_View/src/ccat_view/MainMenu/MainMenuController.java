@@ -51,8 +51,6 @@ import javafx.scene.text.Font;
  */
 public class MainMenuController implements Initializable {
     
-    private FileLoader template;
-    
     @FXML
     private MenuItem exit;
     @FXML
@@ -68,10 +66,10 @@ public class MainMenuController implements Initializable {
     @FXML
     private Tab partC;
     
+    private FileLoader template;
     private TabPane tabPane;
     private List<Tab> tabs;
     private List<VBox> scrollers;
-    
     private Map<ToggleGroup, String> answers;
 
     public MainMenuController(){

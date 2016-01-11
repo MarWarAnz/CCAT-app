@@ -26,6 +26,7 @@ public class FileLoader {
     }
     
     public Map<String, Map<String, List<String>>> getContent(){return Collections.unmodifiableMap(content);}
+    
     public void traverseMap(){
         for (String header : content.keySet()){
             System.out.println(header);
