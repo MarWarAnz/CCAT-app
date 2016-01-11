@@ -43,12 +43,14 @@ public class FileLoader {
         
         while (fileLoader.hasNextLine()){
             temp = fileLoader.nextLine();
+	    System.out.println(temp);
             
             if (temp.isEmpty()) {}
             else if  (temp.charAt(0) == '['){
                 if (!header.isEmpty()) content.put(header, sections);
                 sections = new HashMap<>();
                 header = temp.split("\\[")[1].split("\\]")[0];
+		System.out.println(header);
                 subHeader = fileLoader.nextLine().split("-")[1];
             }
             else if (temp.charAt(0) == '-'){

@@ -79,10 +79,10 @@ public class MainMenuController implements Initializable {
     @FXML
     private void populateTabs(ScrollPane pane){
         
-        Map content; //= template.getContent();
+        Map content;// = template.getContent();
+	
         if (pane == partAScroller){
-            content = template.getContent().get("Part A: MetaData")
-            
+            content = (Map) template.getContent().get("PART A: MetaVision");
         }
     }
             
@@ -95,11 +95,12 @@ public class MainMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            this.template = new FileLoader(new FileReader("questions.txt"));
+            this.template = new FileLoader(new FileReader("src/questions.txt"));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MainMenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        template.loadTemplate();
+	populateTabs(partAScroller);
     }
 
 }
