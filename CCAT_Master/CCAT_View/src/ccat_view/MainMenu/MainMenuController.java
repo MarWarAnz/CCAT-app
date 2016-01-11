@@ -15,10 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
-
 import javafx.stage.Stage;
 import ccat_model.*;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -27,17 +25,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
-
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.layout.FlowPane;
-
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -93,6 +88,7 @@ public class MainMenuController implements Initializable {
         Stage stage = new Stage();
         stage.setTitle("CCAT - Login");
         stage.setScene(scene);
+        stage.getIcons().add(new Image("/medicalIcon.png"));
         stage.show();
     }
 
@@ -103,6 +99,7 @@ public class MainMenuController implements Initializable {
         Stage stage = new Stage();
         stage.setTitle("CCAT");
         stage.setScene(scene);
+        stage.getIcons().add(new Image("/medicalIcon.png"));
         stage.show();
     }
     
