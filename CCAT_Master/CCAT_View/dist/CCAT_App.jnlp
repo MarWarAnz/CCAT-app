@@ -8,7 +8,11 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+<<<<<<< HEAD
     <jar href="CCAT_App.jar" size="1050024" download="eager" />
+=======
+    <jar href="CCAT_App.jar" size="1049833" download="eager" />
+>>>>>>> 692b09d4c6a38cc0823132ca2775e165679c4eb5
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="CCAT_App" >
     <param name="requiredFXVersion" value="8.0+"/>

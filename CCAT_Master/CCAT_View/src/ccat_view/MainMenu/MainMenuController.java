@@ -27,17 +27,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
+
 
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.FlowPane;
 
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -60,10 +62,16 @@ public class MainMenuController implements Initializable {
     @FXML
     private VBox partCScroller;
     @FXML
-    private Map<String, HBox> accessor;
+    private Tab partA;
+    @FXML
+    private Tab partB;
+    @FXML
+    private Tab partC;
     
+    private TabPane tabPane;
+    private List<Tab> tabs;
     private List<VBox> scrollers;
-    //private List<ToggleGroup> answers;
+    
     private Map<ToggleGroup, String> answers;
 
     public MainMenuController(){
@@ -113,15 +121,18 @@ public class MainMenuController implements Initializable {
         int i = 0;
         for (String header : content.keySet()){
             
+            //tabPane.getSelectionModel().select(tabs.get(i));
+            
             for (String subheader : content.get(header).keySet()){
                 
-                FlowPane sectionBox = new FlowPane();   
+                FlowPane sectionBox = new FlowPane(); 
                 sectionBox.setStyle("-fx-background-color: #336699");
                 Label subHeaderLabel = new Label(subheader);
                 subHeaderLabel.setTextFill(Color.web("#FFFFFF"));
                 subHeaderLabel.setFont(Font.font("Verdana", 15));
                 sectionBox.getChildren().add(subHeaderLabel);
                 scrollers.get(i).getChildren().add(sectionBox);
+                
                 List<String> list = content.get(header).get(subheader);
                 
                 
@@ -167,6 +178,10 @@ public class MainMenuController implements Initializable {
                     flow.setHgap(10.0);
                     flow.setPrefWrapLength(600.0);
                     flow.getChildren().addAll(label, yes, no, na, area);
+                    flow.setStyle("-fx-border-style: solid;"
+                                    + "-fx-border-width: 0.25;"
+                                    + "-fx-border-color: black");
+         
 //                    FlowPane flow2 = new FlowPane();
 //                    flow2.setVgap(10.0);
 //                    flow2.setHgap(10.0);
@@ -180,6 +195,10 @@ public class MainMenuController implements Initializable {
         }
     }
     
+    @FXML
+    public void saveFile(){
+        
+    }
     //TODO: add onClickListeners to radioButton groups to update score in real time
     //      as well as check for errors in case someone tries to submit an incomplete 
     //      form
@@ -205,11 +224,22 @@ public class MainMenuController implements Initializable {
             Logger.getLogger(MainMenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
         scrollers = new ArrayList<>();
+        tabs = new ArrayList<>();
         scrollers.add(partAScroller);
         scrollers.add(partBScroller);
         scrollers.add(partCScroller);
+        tabs.add(partA);
+        tabs.add(partB);
+        tabs.add(partC);
         template.loadTemplate();
+//        for (VBox box : scrollers){
+//            box.setStyle("-fx-border-style: solid;"
+//                + "-fx-border-width: 1;"
+//                + "-fx-border-color: black");
+//        }
+        
         populateTabs();
+        //tabPane.getSelectionModel().select(partA);
     }
 
 }
