@@ -1,0 +1,12 @@
+Elliott, your mission, should you choose to accept, will be to:
+
+	1) Implement threading with the splash screen, as I believe you said you've 
+	already done
+	
+	2) Continue working on creating, storing and validating user accounts
+	
+	3) Try to figure out the window resizing problem
+
+Nice touch with the icon btw, it looks awesome!
+
+This message will now self-destruct... not actually... but it would be cool if it did.
