@@ -169,6 +169,7 @@ public class MainMenuController implements Initializable {
                     na.setToggleGroup(group);
                     TextArea area = new TextArea();
                     area.setPrefSize(0.0, 0.0);
+                    area.setWrapText(true);
                     area.setVisible(false);
                     FlowPane flow = new FlowPane();
 //                    Pane pane = new Pane();
