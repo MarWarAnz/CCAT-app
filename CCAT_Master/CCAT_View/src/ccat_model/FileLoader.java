@@ -19,6 +19,7 @@ public class FileLoader {
     
     private final Scanner fileLoader;
     private final Map<String, Map<String, List<String>>> content;
+    private List<String> orderedSubheaders;
     
     public FileLoader(FileReader file) throws FileNotFoundException{
         fileLoader = new Scanner(file);
@@ -42,23 +43,29 @@ public class FileLoader {
         String header = "", subHeader = "", temp;
         Map<String, List<String>> sections = new HashMap<>();
         List<String> fields = new ArrayList<>();
+        orderedSubheaders = new ArrayList<>();
         
         while (fileLoader.hasNextLine()){
             temp = fileLoader.nextLine();
-            System.out.println(temp);
+            //System.out.println(temp);
             if (temp.isEmpty()) {}
             else if  (temp.charAt(0) == '['){
                 if (!header.isEmpty()) content.put(header, sections);
                 sections = new HashMap<>();
                 header = temp.split("\\[")[1].split("\\]")[0];
-                subHeader = fileLoader.nextLine().split("-")[1];
+                //subHeader = fileLoader.nextLine().split("-")[1];
             }
             else if (temp.charAt(0) == '-'){
                 
                 //TODO: make sure the last read in subheader is put to the map properly
+                if (!sections.isEmpty()) sections.put(subHeader, fields);
                 sections.put(subHeader, fields);
                 fields = new ArrayList<>();
+                orderedSubheaders.add(subHeader);
+                //System.out.println(subHeader + " dwvmwpo jgwrj ");
                 subHeader = temp.split("-")[1];
+                //orderedSubheaders.add(subHeader);
+                //System.out.println(subHeader + " ======== ");
             }
             
             else {
@@ -69,6 +76,10 @@ public class FileLoader {
         content.put(header, sections);
         
     }
+    
+    public List<String> getOrderedSubheaders(){
+        return orderedSubheaders;
+    } 
     
     //TODO: make headers return in the same order as they are in questions.txt
     public List<String> getHeaders(){

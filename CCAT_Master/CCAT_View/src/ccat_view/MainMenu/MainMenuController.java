@@ -25,13 +25,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+
+import javafx.geometry.Pos;
+
+
+
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
+
 import javafx.scene.image.Image;
+
+import javafx.scene.layout.AnchorPane;
+
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -117,8 +127,11 @@ public class MainMenuController implements Initializable {
         for (String header : content.keySet()){
             
             //tabPane.getSelectionModel().select(tabs.get(i));
-            
+            scrollers.get(i).setAlignment(Pos.CENTER); 
             for (String subheader : content.get(header).keySet()){
+                //content.get(header).keySet()
+                //template.getOrderedSubheaders()
+                //AnchorPane anchor = new AnchorPane();
                 
                 FlowPane sectionBox = new FlowPane(); 
                 sectionBox.setStyle("-fx-background-color: #336699");
@@ -126,14 +139,27 @@ public class MainMenuController implements Initializable {
                 subHeaderLabel.setTextFill(Color.web("#FFFFFF"));
                 subHeaderLabel.setFont(Font.font("Verdana", 15));
                 sectionBox.getChildren().add(subHeaderLabel);
+                //anchor.getChildren().add(sectionBox);
+                sectionBox.setPrefWidth(600.0);
+//                AnchorPane.setBottomAnchor(sectionBox, 0.0);
+//                AnchorPane.setTopAnchor(sectionBox, 0.0);
+//                AnchorPane.setLeftAnchor(sectionBox, 0.0);
+//                AnchorPane.setRightAnchor(sectionBox, 0.0);
                 scrollers.get(i).getChildren().add(sectionBox);
                 
                 List<String> list = content.get(header).get(subheader);
-                
+                 System.out.println(subheader);
                 
                 for (String question : list) {
+                   
+                    AnchorPane anchor2 = new AnchorPane();
                     Label label = new Label(question);
-                    label.setPrefWidth(450.0);
+                    label.setPrefWidth(590.0);
+                    label.setStyle("-fx-font-weight: bold");
+                    AnchorPane.setBottomAnchor(label, 0.0);
+                    AnchorPane.setTopAnchor(label, 0.0);
+                    AnchorPane.setLeftAnchor(label, 0.0);
+                    AnchorPane.setRightAnchor(label, 0.0);
                     ToggleGroup group = new ToggleGroup();
                     RadioButton yes = new RadioButton("yes");
                     RadioButton no = new RadioButton("no");
@@ -146,32 +172,40 @@ public class MainMenuController implements Initializable {
                     na.setToggleGroup(group);
                     TextArea area = new TextArea();
                     area.setPrefSize(0.0, 0.0);
+                    area.setWrapText(true);
                     area.setVisible(false);
+                    FlowPane flow = new FlowPane();
+//                    Pane pane = new Pane();
+//                    pane.setPrefWidth(700);
+                    
                     
                     no.setOnAction((ActionEvent event) -> {
                         //area.setMaxSize(600.0, 10.0);
                         //area.resize(600.0, 10.0);
-                        area.setPrefSize(600.0, 10.0);
+                        //AnchorPane.setRightAnchor(area, Double.NaN);
+                        area.setPrefSize(800.0, 65.0);
                         area.setVisible(true);
+                        area.positionCaret(0);
                     });
                     na.setOnAction((ActionEvent event) -> {
                         //area.setMaxSize(600.0, 10.0);
                         //area.resize(600.0, 10.0);
-                        area.setPrefSize(600.0, 10.0);
+                        area.setPrefSize(800.0, 65.0);
                         area.setVisible(true);
                     });
                     yes.setOnAction((ActionEvent event) -> {
                         //area.setMaxSize(0.0, 0.0);
-                        //area.resize(0.0, 0.0);
+                        area.setPrefSize(0.0, 0.0);
                         area.setVisible(false);
+                        flow.resize(800.0, 10.0);
                     });
                     
                     answers.put(group, question);
                     //TODO:  add ToggleGroup to a list so input can be accessed later
-                    FlowPane flow = new FlowPane();
+                    
                     flow.setVgap(10.0);
                     flow.setHgap(10.0);
-                    flow.setPrefWrapLength(600.0);
+                    flow.setPrefWrapLength(800.0);
                     flow.getChildren().addAll(label, yes, no, na, area);
                     flow.setStyle("-fx-border-style: solid;"
                                     + "-fx-border-width: 0.25;"
@@ -182,8 +216,8 @@ public class MainMenuController implements Initializable {
 //                    flow2.setHgap(10.0);
 //                    flow2.setMaxSize(0.0, 0.0);
 //                    flow2.getChildren().add(area);
-
-                    scrollers.get(i).getChildren().addAll(flow);
+                    anchor2.getChildren().add(flow);
+                    scrollers.get(i).getChildren().addAll(anchor2);
                 }
             }
             i++;
@@ -227,7 +261,12 @@ public class MainMenuController implements Initializable {
         tabs.add(partB);
         tabs.add(partC);
         template.loadTemplate();
-//        for (VBox box : scrollers){
+        for (VBox box : scrollers){
+            AnchorPane.setBottomAnchor(box, 0.0);
+            AnchorPane.setTopAnchor(box, 0.0);
+            AnchorPane.setLeftAnchor(box, 0.0);
+            AnchorPane.setRightAnchor(box, 0.0);
+        }
 //            box.setStyle("-fx-border-style: solid;"
 //                + "-fx-border-width: 1;"
 //                + "-fx-border-color: black");
