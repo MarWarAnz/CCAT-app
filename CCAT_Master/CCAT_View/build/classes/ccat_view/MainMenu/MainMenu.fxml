@@ -51,7 +51,7 @@
                         </ScrollPane>
                      </content>
                   </Tab>
-                  <Tab disable="true" text="Admin">
+                  <Tab fx:id="admin" disable="true" text="Admin">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                     </content>
@@ -66,7 +66,7 @@
                   <items>
                     <MenuItem mnemonicParsing="false" onAction="#onAdminTasks" text="Admin Tasks" />
                         <MenuItem mnemonicParsing="false" onAction="#onLogout" text="Logout" />
-                        <MenuItem mnemonicParsing="false" onAction="#onExit" text="Exit" />
+                        <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#onExit" text="Exit" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">

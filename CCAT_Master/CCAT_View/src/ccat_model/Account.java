@@ -18,7 +18,7 @@ import java.security.MessageDigest;
  *
  * @author JRebo_000
  */
-public abstract class Account {
+public class Account {
 
     protected File accounts;
     protected String uname;
@@ -55,7 +55,7 @@ public abstract class Account {
         try {
             String filename = "accounts.txt";
             FileWriter fw = new FileWriter(filename, true); //the true will append the new data
-            fw.write(uname + " " + passwd + "\n");//appends the string to the file
+            fw.write(uname + " " + passwd + "\n"); //appends the string to the file
             fw.close();
         } catch (IOException ioe) {
             System.err.println("IOException: " + ioe.getMessage());

@@ -49,6 +49,11 @@
                   <Label text="Admin login" />
                </children>
             </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <Label fx:id="errMsg" />
+               </children>
+            </HBox>
          </children>
       </GridPane>
    </children>

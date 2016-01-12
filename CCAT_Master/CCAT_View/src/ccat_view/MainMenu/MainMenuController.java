@@ -25,26 +25,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-
 import javafx.geometry.Pos;
-
-
-
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
-
 import javafx.scene.image.Image;
-
 import javafx.scene.layout.AnchorPane;
-
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -70,6 +60,8 @@ public class MainMenuController implements Initializable {
     private Tab partB;
     @FXML
     private Tab partC;
+    @FXML
+    private Tab admin;
     
     private FileLoader template;
     private TabPane tabPane;
@@ -78,12 +70,17 @@ public class MainMenuController implements Initializable {
     private Map<ToggleGroup, String> answers;
 
     public MainMenuController(){
-        
     }
-
+    
+    //TMP
+    public void setAdminTasks(){
+        admin.setDisable(false);
+    }
+    //
+    
     @FXML
     private void onLogout(ActionEvent event) {
-        System.out.println("Logging out...");
+        admin.setDisable(true);
     }
 
     @FXML
