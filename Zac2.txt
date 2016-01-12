@@ -1,0 +1,11 @@
+Zac, your next mission, should you choose to accept, will be to:
+
+	1) Implement a chart that can scroll horizontally
+
+	2) add options to admin tasks that will allow a user to open a single file (using 
+	a file browser) or open all files in folder in the format we discussed in our
+	meeting.
+
+Great job with the admin layout so far, the nested tab pane was a nice touch.
+
+This message will now self-destruct... Jk, that would be unsafe.
