@@ -25,7 +25,7 @@ public class Account {
     protected String pass;
     protected String salt;
 
-    public Account() throws FileNotFoundException {
+    public Account() throws FileNotFoundException, IOException {
         this.salt = "M5@aG9:[2cY0";
         this.accounts = new File("accounts.txt");
     }
@@ -38,8 +38,7 @@ public class Account {
         String MD5 = MD5(pass + this.salt);
         while (scanner.hasNext()) {
             validator = scanner.nextLine().split(" ");
-            if (uname.compareTo(validator[0]) == 0
-                    && MD5.compareTo(validator[1]) == 0) {
+            if (uname.equals(validator[0]) && MD5.equals(validator[1])) {
                 return true;
             }
         }
@@ -65,7 +64,7 @@ public class Account {
     private String MD5(String s) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] messageDigest = md.digest(pass.getBytes());
+            byte[] messageDigest = md.digest(s.getBytes());
             BigInteger number = new BigInteger(1, messageDigest);
             String hashtext = number.toString(16);
             while (hashtext.length() < 32) {
@@ -73,7 +72,8 @@ public class Account {
             }
             return hashtext;
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.err.println("Exception: " + e.getMessage());
         }
+        return null;
     }
 }

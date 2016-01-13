@@ -14,7 +14,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import ccat_model.*;
 import java.io.FileNotFoundException;
@@ -47,8 +46,6 @@ import javafx.scene.text.Font;
 public class MainMenuController implements Initializable {
     
     @FXML
-    private MenuItem exit;
-    @FXML
     private VBox partAScroller;
     @FXML
     private VBox partBScroller;
@@ -71,12 +68,6 @@ public class MainMenuController implements Initializable {
 
     public MainMenuController(){
     }
-    
-    //TMP
-    public void setAdminTasks(){
-        admin.setDisable(false);
-    }
-    //
     
     @FXML
     private void onLogout(ActionEvent event) {
@@ -235,7 +226,11 @@ public class MainMenuController implements Initializable {
     //      and be more loosely coupled
     
     //TODO: error logging and reporting option
-            
+    
+    public final void setAccess(){
+        admin.setDisable(false);
+    }
+    
     /**
      * Initializes the controller class.
      *
