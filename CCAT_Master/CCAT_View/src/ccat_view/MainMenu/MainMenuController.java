@@ -38,13 +38,21 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+//TODO: add onClickListeners to radioButton groups to update score in real time
+//      as well as check for errors in case someone tries to submit an incomplete 
+//      form
+
+//TODO: add tabs dynamically to make the populateTabs function run more smoothly 
+//      and be more loosely coupled
+//TODO: error logging and reporting option
+
 /**
  * FXML Controller class
  *
  * @author Elliott
  */
 public class MainMenuController implements Initializable {
-    
+
     @FXML
     private VBox partAScroller;
     @FXML
@@ -59,16 +67,16 @@ public class MainMenuController implements Initializable {
     private Tab partC;
     @FXML
     private Tab admin;
-    
+
     private FileLoader template;
     private TabPane tabPane;
     private List<Tab> tabs;
     private List<VBox> scrollers;
     private Map<ToggleGroup, String> answers;
 
-    public MainMenuController(){
+    public MainMenuController() {
     }
-    
+
     @FXML
     private void onLogout(ActionEvent event) {
         admin.setDisable(true);
@@ -81,12 +89,16 @@ public class MainMenuController implements Initializable {
 
     @FXML
     private void onAdminTasks(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("VerifyAdmin.fxml"));
-        Scene scene = new Scene(root);
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("VerifyAdmin.fxml"));
+        Parent par = loader.load();
+        Scene scene = new Scene(par);
         Stage stage = new Stage();
         stage.setTitle("CCAT - Login");
         stage.setScene(scene);
         stage.getIcons().add(new Image("/medicalIcon.png"));
+        VerifyAdminController verifyAdminController = loader.getController();
+        verifyAdminController.setMMC(this);
         stage.show();
     }
 
@@ -100,28 +112,26 @@ public class MainMenuController implements Initializable {
         stage.getIcons().add(new Image("/medicalIcon.png"));
         stage.show();
     }
-    
-    
+
     //TODO: make partB tab also scrollable
-    
     @FXML
-    private void populateTabs(){
-        
+    private void populateTabs() {
+
         Map<String, Map<String, List<String>>> content = template.getContent();
         answers = new HashMap<>();
         //template.traverseMap();
         template.getHeaders();
         int i = 0;
-        for (String header : content.keySet()){
-            
+        for (String header : content.keySet()) {
+
             //tabPane.getSelectionModel().select(tabs.get(i));
-            scrollers.get(i).setAlignment(Pos.CENTER); 
-            for (String subheader : content.get(header).keySet()){
+            scrollers.get(i).setAlignment(Pos.CENTER);
+            for (String subheader : content.get(header).keySet()) {
                 //content.get(header).keySet()
                 //template.getOrderedSubheaders()
                 //AnchorPane anchor = new AnchorPane();
-                
-                FlowPane sectionBox = new FlowPane(); 
+
+                FlowPane sectionBox = new FlowPane();
                 sectionBox.setStyle("-fx-background-color: #336699");
                 Label subHeaderLabel = new Label(subheader);
                 subHeaderLabel.setTextFill(Color.web("#FFFFFF"));
@@ -134,12 +144,12 @@ public class MainMenuController implements Initializable {
 //                AnchorPane.setLeftAnchor(sectionBox, 0.0);
 //                AnchorPane.setRightAnchor(sectionBox, 0.0);
                 scrollers.get(i).getChildren().add(sectionBox);
-                
+
                 List<String> list = content.get(header).get(subheader);
-                 System.out.println(subheader);
-                
+                System.out.println(subheader);
+
                 for (String question : list) {
-                   
+
                     AnchorPane anchor2 = new AnchorPane();
                     Label label = new Label(question);
                     label.setPrefWidth(590.0);
@@ -165,8 +175,7 @@ public class MainMenuController implements Initializable {
                     FlowPane flow = new FlowPane();
 //                    Pane pane = new Pane();
 //                    pane.setPrefWidth(700);
-                    
-                    
+
                     no.setOnAction((ActionEvent event) -> {
                         //area.setMaxSize(600.0, 10.0);
                         //area.resize(600.0, 10.0);
@@ -187,18 +196,18 @@ public class MainMenuController implements Initializable {
                         area.setVisible(false);
                         flow.resize(800.0, 10.0);
                     });
-                    
+
                     answers.put(group, question);
                     //TODO:  add ToggleGroup to a list so input can be accessed later
-                    
+
                     flow.setVgap(10.0);
                     flow.setHgap(10.0);
                     flow.setPrefWrapLength(800.0);
                     flow.getChildren().addAll(label, yes, no, na, area);
                     flow.setStyle("-fx-border-style: solid;"
-                                    + "-fx-border-width: 0.25;"
-                                    + "-fx-border-color: black");
-         
+                            + "-fx-border-width: 0.25;"
+                            + "-fx-border-color: black");
+
 //                    FlowPane flow2 = new FlowPane();
 //                    flow2.setVgap(10.0);
 //                    flow2.setHgap(10.0);
@@ -211,26 +220,16 @@ public class MainMenuController implements Initializable {
             i++;
         }
     }
-    
+
     @FXML
-    public void saveFile(){
+    public void saveFile() {
         
     }
-    //TODO: add onClickListeners to radioButton groups to update score in real time
-    //      as well as check for errors in case someone tries to submit an incomplete 
-    //      form
     
-    
-
-    //TODO: add tabs dynamically to make the populateTabs function run more smoothly 
-    //      and be more loosely coupled
-    
-    //TODO: error logging and reporting option
-    
-    public final void setAccess(){
+    public final void setAccess() {
         admin.setDisable(false);
     }
-    
+
     /**
      * Initializes the controller class.
      *
@@ -253,7 +252,7 @@ public class MainMenuController implements Initializable {
         tabs.add(partB);
         tabs.add(partC);
         template.loadTemplate();
-        for (VBox box : scrollers){
+        for (VBox box : scrollers) {
             AnchorPane.setBottomAnchor(box, 0.0);
             AnchorPane.setTopAnchor(box, 0.0);
             AnchorPane.setLeftAnchor(box, 0.0);
@@ -263,7 +262,7 @@ public class MainMenuController implements Initializable {
 //                + "-fx-border-width: 1;"
 //                + "-fx-border-color: black");
 //        }
-        
+
         populateTabs();
         //tabPane.getSelectionModel().select(partA);
     }
