@@ -42,8 +42,6 @@ import javafx.scene.text.Font;
 //      as well as check for errors in case someone tries to submit an incomplete 
 //      form
 
-//TODO: add tabs dynamically to make the populateTabs function run more smoothly 
-//      and be more loosely coupled
 //TODO: error logging and reporting option
 
 /**

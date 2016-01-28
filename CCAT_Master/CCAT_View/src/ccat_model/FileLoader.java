@@ -33,8 +33,9 @@ public class FileLoader {
             System.out.println(header);
             for (String subheader : content.get(header).keySet()){
                 System.out.println(subheader);
-                for (String field : content.get(header).get(subheader))
+                for (String field : content.get(header).get(subheader)) {
                     System.out.println(field);
+                }
             }
         }
     }
@@ -50,7 +51,9 @@ public class FileLoader {
             //System.out.println(temp);
             if (temp.isEmpty()) {}
             else if  (temp.charAt(0) == '['){
-                if (!header.isEmpty()) content.put(header, sections);
+                if (!header.isEmpty()) {
+                    content.put(header, sections);
+                }
                 sections = new HashMap<>();
                 header = temp.split("\\[")[1].split("\\]")[0];
                 //subHeader = fileLoader.nextLine().split("-")[1];
@@ -58,7 +61,9 @@ public class FileLoader {
             else if (temp.charAt(0) == '-'){
                 
                 //TODO: make sure the last read in subheader is put to the map properly
-                if (!sections.isEmpty()) sections.put(subHeader, fields);
+                if (!sections.isEmpty()) {
+                    sections.put(subHeader, fields);
+                }
                 sections.put(subHeader, fields);
                 fields = new ArrayList<>();
                 orderedSubheaders.add(subHeader);
@@ -78,7 +83,7 @@ public class FileLoader {
     }
     
     public List<String> getOrderedSubheaders(){
-        return orderedSubheaders;
+        return Collections.unmodifiableList(orderedSubheaders);
     } 
     
     //TODO: make headers return in the same order as they are in questions.txt
